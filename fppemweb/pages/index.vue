@@ -1,31 +1,52 @@
+<!-- index.vue -->
 <template>
   <div>
-    <h1 class="text-4xl font-bold text-center mt-8 mb-4">Resep Nenek</h1>
-    <h2 class="text-2xl font-semibold text-center mb-8">Makanan Kos</h2>
-    <div class="w-1/2 mx-auto overflow-hidden shadow-lg rounded-lg">
-      <div ref="photoContainer" class="flex transition-transform duration-500 ease-in-out">
-        <img v-for="(photo, index) in photos" :key="index" :src="photo" alt="Photo" class="w-full h-96 object-cover">
-        <!-- Adjusted the height to h-96 for even larger photos -->
+    <header class="bg-gray-800 text-white py-4">
+      <div class="container mx-auto text-center">
+        <h1 class="text-4xl font-bold">Resep Nenek</h1>
+        <p class="text-lg">Temukan dan coba resep makanan enak dari nenek!</p>
       </div>
+    </header>
 
-      <div class="absolute top-1/2 transform -translate-y-1/2 flex">
-        <button @click="prevPhoto" class="text-white text-2xl mr-4">&lt;</button>
-        <button @click="nextPhoto" class="text-white text-2xl">&gt;</button>
-      </div>
-    </div>
-    <br>
-    <h2 class="text-2xl font-semibold text-center mb-8">Makanan Porsi Besar</h2>
-    <div class="w-1/2 mx-auto overflow-hidden shadow-lg rounded-lg">
-      <div ref="photoContainer" class="flex transition-transform duration-500 ease-in-out">
-        <img v-for="(photo, index) in photos" :key="index" :src="photo" alt="Photo" class="w-full h-96 object-cover">
-        <!-- Adjusted the height to h-96 for even larger photos -->
-      </div>
+    <section class="py-8">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-semibold text-center mb-8">Makanan Kos</h2>
 
-      <div class="absolute top-1/2 transform -translate-y-1/2 flex">
-        <button @click="prevPhoto" class="text-white text-2xl mr-4">&lt;</button>
-        <button @click="nextPhoto" class="text-white text-2xl">&gt;</button>
+        <div class="relative w-full mx-auto overflow-hidden shadow-lg rounded-lg">
+          <div ref="kosPhotoContainer" class="flex transition-transform duration-500 ease-in-out">
+            <img v-for="(photo, index) in kosPhotos" :key="index" :src="photo" alt="Photo" class="w-full h-96 object-cover">
+          </div>
+
+          <div class="absolute inset-y-0 left-0 flex items-center">
+            <button @click="prevKosPhoto" class="text-white text-2xl ml-4">&lt;</button>
+          </div>
+
+          <div class="absolute inset-y-0 right-0 flex items-center">
+            <button @click="nextKosPhoto" class="text-white text-2xl mr-4">&gt;</button>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="py-8 bg-gray-100">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-semibold text-center mb-8">Makanan Porsi Besar</h2>
+
+        <div class="relative w-full mx-auto overflow-hidden shadow-lg rounded-lg">
+          <div ref="besarPhotoContainer" class="flex transition-transform duration-500 ease-in-out">
+            <img v-for="(photo, index) in besarPhotos" :key="index" :src="photo" alt="Photo" class="w-full h-96 object-cover">
+          </div>
+
+          <div class="absolute inset-y-0 left-0 flex items-center">
+            <button @click="prevBesarPhoto" class="text-white text-2xl ml-4">&lt;</button>
+          </div>
+
+          <div class="absolute inset-y-0 right-0 flex items-center">
+            <button @click="nextBesarPhoto" class="text-white text-2xl mr-4">&gt;</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -33,43 +54,66 @@
 export default {
   data() {
     return {
-      currentIndex: 0,
-      photos: [
-        "photo1.jpg",
-        "photo2.jpg",
-        "photo3.jpg",
-        "photo1.jpg",
-        "photo2.jpg",
-        "photo3.jpg",
+      kosCurrentIndex: 0,
+      besarCurrentIndex: 0,
+      kosPhotos: [
+        "kosPhoto1.jpg",
+        "kosPhoto2.jpg",
+        "kosPhoto3.jpg",
+        // Add more photo URLs as needed
+      ],
+      besarPhotos: [
+        "besarPhoto1.jpg",
+        "besarPhoto2.jpg",
+        "besarPhoto3.jpg",
         // Add more photo URLs as needed
       ],
     };
   },
   methods: {
-    nextPhoto() {
-      if (this.currentIndex < this.photos.length - 1) {
-        this.currentIndex++;
+    nextKosPhoto() {
+      if (this.kosCurrentIndex < this.kosPhotos.length - 1) {
+        this.kosCurrentIndex++;
       } else {
-        this.currentIndex = 0;
+        this.kosCurrentIndex = 0;
       }
-      this.updatePhotoContainer();
+      this.updatePhotoContainer("kos");
     },
-    prevPhoto() {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
+    prevKosPhoto() {
+      if (this.kosCurrentIndex > 0) {
+        this.kosCurrentIndex--;
       } else {
-        this.currentIndex = this.photos.length - 1;
+        this.kosCurrentIndex = this.kosPhotos.length - 1;
       }
-      this.updatePhotoContainer();
+      this.updatePhotoContainer("kos");
     },
-    updatePhotoContainer() {
-      const translateValue = -this.currentIndex * this.$refs.photoContainer.offsetWidth;
-      this.$refs.photoContainer.style.transform = `translateX(${translateValue}px)`;
+    nextBesarPhoto() {
+      if (this.besarCurrentIndex < this.besarPhotos.length - 1) {
+        this.besarCurrentIndex++;
+      } else {
+        this.besarCurrentIndex = 0;
+      }
+      this.updatePhotoContainer("besar");
+    },
+    prevBesarPhoto() {
+      if (this.besarCurrentIndex > 0) {
+        this.besarCurrentIndex--;
+      } else {
+        this.besarCurrentIndex = this.besarPhotos.length - 1;
+      }
+      this.updatePhotoContainer("besar");
+    },
+    updatePhotoContainer(type) {
+      const containerRef = type === "kos" ? "kosPhotoContainer" : "besarPhotoContainer";
+      const currentIndex = type === "kos" ? this.kosCurrentIndex : this.besarCurrentIndex;
+      const translateValue = -currentIndex * this.$refs[containerRef].offsetWidth;
+      this.$refs[containerRef].style.transform = `translateX(${translateValue}px)`;
     },
   },
   mounted() {
     setInterval(() => {
-      this.nextPhoto();
+      this.nextKosPhoto();
+      this.nextBesarPhoto();
     }, 3000);
   },
 };

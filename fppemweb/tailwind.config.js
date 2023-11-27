@@ -11,5 +11,8 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-dark-mode')(),
+  ],
+  darkMode: 'class',
 }
