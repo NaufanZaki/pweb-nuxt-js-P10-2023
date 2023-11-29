@@ -1,35 +1,27 @@
 /** @type {import('payload/types').CollectionConfig} */
-const Blog = {
-    slug: "Blog",
+const log = {
+    slug: "log",
     access: {
       read: () => true,
-      update: () => true,
-      delete: () => true,
       create: () => true,
     },
     fields: [
       {
-        name: "Title",
+        name: "collectionName",
         type: "text",
         required: true,
       },
       {
-        name: "Recipe",
+        name: "action",
         type: "text",
         required: true,
       },
       {
-        name: "Tutorial",
-        type: "text",
-        required: true,
-      },
-      {
-        name: "Image",
-        type: "text",
+        name: "timestamp",
+        type: "date",
         required: true,
       },
     ],
   };
   
-  export default Blog;
-  
+  export default log;

@@ -6,7 +6,7 @@ import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 
 import Users from './collections/Users'
-import Blog from './collections/Blogs'
+import Blog from './collections/Blog'
 // import Author from './collections/Author'
 // import Activity from './collections/Activity'
 

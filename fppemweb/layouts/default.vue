@@ -1,13 +1,13 @@
-<!-- default.vue -->
 <template>
   <div :class="{ 'dark': darkMode }" class="flex flex-col min-h-screen">
-    <nav :class="{ 'dark': darkMode }" class="bg-white border-b border-gray-300 shadow p-4 fixed w-full z-10">
+    <!-- Navbar -->
+    <nav :class="{ 'dark': darkMode }" class="bg-white border-b border-gray-300 shadow p-4 fixed w-full z-20 opacity-90 hover:opacity-100 transition-opacity rounded-b-lg">
       <div class="flex items-center justify-between">
         <NuxtLink to="/" class="text-gray-800 hover:text-gray-600 font-bold text-lg">P10</NuxtLink>
         <div class="flex items-center space-x-4">
-          <NuxtLink to="/" class="text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out transform hover:scale-105">Home</NuxtLink>
-          <NuxtLink to="/blog" class="text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out transform hover:scale-105">Resep</NuxtLink>
-          <NuxtLink to="/about" class="text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out transform hover:scale-105">About</NuxtLink>
+          <NuxtLink to="/" class="nav-link">Home</NuxtLink>
+          <NuxtLink to="/blog" class="nav-link">Resep</NuxtLink>
+          <NuxtLink to="/about" class="nav-link">About</NuxtLink>
           <button @click="toggleDarkMode" class="fixed bottom-4 right-4 bg-gray-800 text-white p-2 rounded-full">
             {{ darkMode ? 'Light Mode' : 'Dark Mode' }}
           </button>
@@ -15,6 +15,7 @@
       </div>
     </nav>
 
+    <!-- Main Content -->
     <div class="flex-1 mt-16">
       <slot />
       <div class="container mx-auto p-4">
@@ -22,6 +23,7 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <footer :class="{ 'dark': darkMode }" class="w-full bg-white rounded-lg shadow mt-auto">
       <div class="max-w-screen-xl mx-auto px-4 pb-6">
         <hr class="py-3 border-gray-300 sm:mx-auto dark:border-gray-700" />
@@ -49,36 +51,7 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-/* Navbar Styling */
-nav {
-  transition: background-color 0.3s ease;
-}
-
-nav:hover {
-  background-color: #f8f8f8;
-}
-
-nav a {
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: #4a4a4a;
-}
-
-/* Navbar Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Dark Mode Styles */
 .dark nav {
   background-color: #1a1a1a;
   color: #ffffff;
@@ -86,12 +59,17 @@ nav a:hover {
 
 .dark ::v-deep a {
   color: #ffffff;
-  
 }
 
 .dark body {
   background-color: #1a1a1a;
   color: #ffffff;
 }
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter, .page-leave-to /* .page-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
 </style>
-
