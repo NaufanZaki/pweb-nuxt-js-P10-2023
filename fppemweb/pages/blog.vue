@@ -26,15 +26,17 @@
 
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <nuxt-link
-        v-for="(post, index) in blogData"
+        v-for="(post, index) in filteredBlogData"
         :key="index"
         :to="{ name: 'id', params: { id: post.id } }"
-
         class="card transition-transform duration-300 transform hover:scale-105"
+        style="height: 400px;" 
       >
-        <img :src="post.image" :alt="post.title" class="w-full h-auto rounded-t-lg border-b-1 border-gray-300" />
-        <div class="p-4 bg-white rounded-b-lg shadow-md">
-          <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
+        <div class="aspect-w-3 aspect-h-4">
+          <img :src="post.image" :alt="post.title" class="w-full h-full object-cover rounded-t-lg border-b-1 border-gray-300" />
+        </div>
+        <div class="card-content p-4 bg-white rounded-b-lg shadow-md">
+          <h2 class="text-xl font-semibold mb-2 overflow-hidden line-clamp-3">{{ post.title }}</h2>
           <p class="text-gray-600"><strong>Ingredients:</strong> {{ post.ingredients }}</p>
         </div>
       </nuxt-link>
@@ -52,6 +54,14 @@ export default {
       searchQuery: "",
       originalData: [],
     };
+  },
+  computed: {
+    filteredBlogData() {
+      return this.blogData.filter(post =>
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        post.ingredients.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
   },
   mounted() {
     this.fetchBlogData();
@@ -84,6 +94,10 @@ export default {
 </script>
 
 <style scoped>
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 /* Dark Mode Styles for the Header */
 .dark header {
   background-color: #1a1a1a;
@@ -154,6 +168,5 @@ header input {
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
+
 </style>
-
-
