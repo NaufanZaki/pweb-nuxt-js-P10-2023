@@ -74,7 +74,9 @@
 </template>
 
 <script>
+
 export default {
+  
   layout: 'default', // Use the 'default' layout
   head() {
     return {

@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <header class="relative bg-gray-800 text-white py-8" style="background-image: url('https://img.freepik.com/free-photo/healthy-homemade-meal-with-organic-vegetable-variation-garlic-seasoning-generated-by-ai_188544-55802.jpg?t=st=1701189311~exp=1701192911~hmac=af35c7d9cac4bd1dc64cb8dbbef2a1d0fea0ff5be385d30010c04d5a81a9b6e2&w=1800'); background-size: cover; background-position: center;">
+  <div >
+    <header class="relative bg-gray-800 text-white py-8" style="background-image: url('https://img.freepik.com/free-photo/healthy-homemade-meal-with-organic-vegetable-variation-garlic-seasoning-generated-by-ai_188544-55802.jpg?t=st=1701189311~exp=1701192911~hmac=af35c7d9cac4bd1dc64cb8dbbef2a1d0fea0ff5be385d30010c04d5a81a9b6e2&w=1800'); background-size: cover; background-position: center;" data-aos="fade-up" data-aos-duration="1000">
       <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
       <div class="container mx-auto flex justify-between items-center relative z-10">
         <div>
-          <h1 class="text-5xl font-bold">Resep Nenek</h1>
-          <p class="text-lg">Find and try our delicacy desire food recipes made by the experts at Resep Nenek.</p>
+          <h1 class="text-5xl font-bold" data-aos="fade-up" data-aos-duration="1000">Resep Nenek</h1>
+          <p class="text-lg" data-aos="fade-up" data-aos-duration="1000">Find and try our delicacy desire food recipes made by the experts at Resep Nenek.</p>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center" data-aos="fade-up" data-aos-duration="1000">
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search by Name or Ingredients..."
             class="px-6 py-3 mr-4 border rounded focus:outline-none focus:border-gray-500 bg-gray-200 text-gray-800"
+            data-aos="fade-up" data-aos-duration="1000"
           />
           <button
             @click="resetSearch"
             class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 focus:outline-none"
+            data-aos="fade-up" data-aos-duration="1000"
           >
             Reset
           </button>
@@ -25,7 +27,7 @@
     </header>
 
 
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-aos="fade-up" data-aos-duration="1000">
           <nuxt-link
             v-for="(post, index) in filteredBlogData"
             :key="index"
@@ -48,6 +50,8 @@
 
 <script>
 import axios from "axios";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default {
   data() {
@@ -67,6 +71,9 @@ export default {
   },
   mounted() {
     this.fetchBlogData();
+    AOS.init();
+    this.fetchBlogData();
+  
   },
   methods: {
     fetchBlogData() {
@@ -176,6 +183,19 @@ body {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
+}
+[data-aos="fade-right"].aos-animate {
+  opacity: 1;
+}
+
+[data-aos="fade-left"] {
+  opacity: 0;
+  transition-property: opacity;
+  will-change: opacity;
+}
+
+[data-aos="fade-left"].aos-animate {
+  opacity: 1;
 }
 
 
