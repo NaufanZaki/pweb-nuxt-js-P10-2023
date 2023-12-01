@@ -111,22 +111,23 @@ body {
 /* Dark Mode Styles for the Header */
 .dark header {
   background-color: #1a1a1a;
-  color: #333333;
+  color: #ffffff; /* Change text color to white */
 }
 
 .dark header input,
 .dark header button {
   border-color: #ffffff;
-  color: #333333;
+  color: #333333; /* Change button text color to dark */
 }
 
 .dark header input::placeholder {
-  color: #333333;
+  color: #888888; /* Adjust placeholder text color */
 }
 
 .dark header button:hover,
 .dark header button:focus {
   background-color: #333333;
+  color: #ffffff; /* Change button text color on hover/focus to white */
 }
 
 /* Header Styles */
