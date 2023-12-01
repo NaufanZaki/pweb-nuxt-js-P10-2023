@@ -1,6 +1,6 @@
 <!-- about.vue -->
 <template>
-  <div class="container mx-auto mt-8 text-center">
+  <div class="container mx-auto mt-8 text-center" data-aos="fade-up" data-aos-duration="1000">
     <h1 class="text-4xl font-bold mb-4">Resep Nenek</h1>
     <p class="text-lg text-gray-600">We insist on creating a user-friendly recipe website that brings you the best culinary experiences. Explore our talented contributors below!</p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
@@ -11,11 +11,22 @@
 
 <script>
 import AuthorCard from '~/components/AuthorCard.vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 export default {
+  mounted() {
+    
+    AOS.init();
+    
+  
+  },
   components: {
     AuthorCard,
   },
+
   data() {
     return {
       authors: [
@@ -62,6 +73,21 @@ body {
 .grid {
   margin-top: 2rem;
 }
+
+[data-aos="fade-right"].aos-animate {
+  opacity: 1;
+}
+
+[data-aos="fade-left"] {
+  opacity: 0;
+  transition-property: opacity;
+  will-change: opacity;
+}
+
+[data-aos="fade-left"].aos-animate {
+  opacity: 1;
+}
+
 </style>
 
 

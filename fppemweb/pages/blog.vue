@@ -138,10 +138,7 @@ body {
 }
 
 /* Dark Mode Styles for the Body */
-.dark body {
-  background-color: #121212; /* Change body background color */
-  color: #888888; /* Change body text color to white */
-}
+
 
 .dark a {
   color: #64b5f6; /* Change link color in dark mode */
@@ -149,6 +146,13 @@ body {
 
 .dark a:hover {
   color: #bbdefb; /* Change link color on hover in dark mode */
+}
+.dark .card-content {
+  padding: 15px;
+  background-color: #2d2929;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(179, 177, 177, 0.06);
 }
 
 /* Additional Styles for the Card */
@@ -176,6 +180,13 @@ body {
 
 .card-content h2 {
   color: #333333; /* Set the title color to dark grey */
+}
+.dark .card-content h2 {
+  color: #a19c9c; /* Set the title color to dark grey */
+}
+
+.dark .card-content p {
+  color: rgb(169, 152, 134); /* Set the title color to dark grey */
 }
 
 .fade-enter-active, .fade-leave-active {
