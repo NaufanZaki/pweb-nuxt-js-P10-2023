@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container" :class="{ 'dark-mode': isDarkMode }">
+  <div class="page-container" :class="{ 'dark-mode': isDarkMode }" data-aos="fade-up" data-aos-duration="1000">
     <!-- Header Section -->
     <div class="absolute inset-0 flex items-center justify-center text-white">
       <h2 :style="{ opacity: 1 - layerOpacity }" class="text-4xl font-bold"></h2>
@@ -30,7 +30,7 @@
     </header>
 
     <!-- Discover Culinary Delights Section -->
-    <div class="container-wrapper">
+    <div class="container-wrapper" data-aos="fade-up" data-aos-duration="1000">
       <section class="py-16" data-aos="fade-right" data-aos-duration="1000">
         <!-- Set the duration in milliseconds -->
         <div class="container mx-auto text-center hover-container">
@@ -48,40 +48,49 @@
         </div>
       </section>
     </div>
-
-    <!-- Slides Section -->
-    <div class="relative overflow-hidden">
-      <!-- Slides -->
-      <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-        <div v-for="(post, index) in blogData" :key="index" class="w-full flex-shrink-0">
-          <nuxt-link :to="{ name: 'id', params: { id: post.id } }" class="block relative group">
-            <div class="relative group">
-              <img :src="post.image" :alt="post.title" class="w-full h-96 object-cover mb-0" />
-              <!-- Increase the height here (e.g., h-96) -->
-              <div class="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-40 group-hover:opacity-0"></div>
-            </div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-center transition-transform transform group-hover:scale-105 text-white hover">
-                <h2 class="text-4xl font-semibold mb-2">{{ post.title }}</h2>
-                <!-- Increase the font size here (e.g., text-4xl) -->
-                <p class="text-lg">{{ post.recipe }}</p>
-                <p class="text-lg">{{ post.tutorial }}</p>
-              </div>
-            </div>
-          </nuxt-link>
-        </div>
-      </div>
-      <!-- Navigation Arrows -->
-      <button @click="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-full opacity-60 hover:opacity-80">
-        <span>&lt;</span>
-      </button>
-      <button @click="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-full opacity-60 hover:opacity-80">
-        <span>&gt;</span>
-      </button>
-    </div>
   </div>
+  <br>
+  <br>
+    <!-- Featured Recipe Section -->
+<div class="container-wrapper" data-aos="fade-up" data-aos-duration="1000">
+  <h2 class="text-4xl font-semibold mb-8 text-center hover-line">Featured Recipe</h2>
+
+  <!-- Slides Section -->
+  <div class="relative overflow-hidden" data-aos="fade-up" data-aos-duration="1000">
+    <!-- Slides -->
+    <div class="flex transition-transform duration-500 ease-in-out" data-aos="fade-up" data-aos-duration="1000" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <!-- Featured Recipe Card -->
+      <div v-for="(post, index) in blogData" :key="index" class="w-full flex-shrink-0">
+        <nuxt-link :to="{ name: 'id', params: { id: post.id } }" class="block relative group">
+          <div class="relative group">
+            <img :src="post.image" :alt="post.title" class="w-full h-96 object-cover mb-0" />
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-40 group-hover:opacity-0"></div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+            <div class="text-center transition-transform transform group-hover:scale-105 text-white hover">
+              <h2 class="text-4xl font-semibold mb-2">{{ post.title }}</h2>
+              <p class="text-lg mb-4">{{ post.recipe }}</p>
+              <p class="text-lg">{{ post.tutorial }}</p>
+            </div>
+          </div>
+        </nuxt-link>
+      </div>
+    </div>
+    <!-- Navigation Arrows -->
+    <button @click="prevSlide" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-full opacity-60 hover:opacity-80">
+      <span>&lt;</span>
+    </button>
+    <button @click="nextSlide" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-full opacity-60 hover:opacity-80">
+      <span>&gt;</span>
+    </button>
+  </div>
+</div>
+
+
+
+
   <!-- Cooking Tips Section -->
-  <div class="container-wrapper">
+  <div class="container-wrapper" data-aos="fade-up" data-aos-duration="1000">
     <section class="py-16" data-aos="fade-left" data-aos-duration="1000">
       <!-- Set the duration in milliseconds -->
       <div class="container mx-auto text-center hover-container">
@@ -99,7 +108,88 @@
       </div>
     </section>
   </div>
-  <!-- Newsletter Subscription Section -->
+  <!-- Upcoming Recipes Section -->
+<div class="container-wrapper">
+  <section class="py-16" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container mx-auto text-center hover-container">
+      <h2 class="text-4xl font-semibold mb-4 hover-line">Upcoming Recipe</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+        <!-- Featured Recipe Card 1 -->
+        <div class="group relative overflow-hidden rounded-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+          <img
+            src="https://img.freepik.com/free-photo/top-view-delicious-salmon-table_23-2150857906.jpg?t=st=1701349674~exp=1701353274~hmac=2024009de6a1a63e9bf5045c4567e52ef06370c4ef281e94de4dfca7efaf711b&w=1800"
+            alt="Featured Recipe"
+            class="w-full h-64 object-cover mb-0 rounded-t-md"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-40 group-hover:opacity-0"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center transition-transform transform group-hover:scale-105 text-white hover">
+              <h2 class="text-2xl font-semibold mb-2">Savory Grilled Salmon</h2>
+              <p class="text-lg">A delightful salmon recipe seasoned to perfection.</p>
+              <p class="text-lg">Ingredients: Salmon fillet, Lemon, Herbs, Olive Oil</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Recipe Card 2 -->
+        <div class="group relative overflow-hidden rounded-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+          <img
+            src="https://img.freepik.com/free-photo/layered-chocolate-tiramisu-cake-with-mascarpone-cream-generated-by-ai_188544-18033.jpg?t=st=1701349464~exp=1701353064~hmac=6c72138968e741b6a5c8d0f6fa61f7d190896833f01a90ead5f9ae59c7663d4a&w=1800"
+            alt="Featured Recipe"
+            class="w-full h-64 object-cover mb-0 rounded-t-md"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-40 group-hover:opacity-0"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center transition-transform transform group-hover:scale-105 text-white hover">
+              <h2 class="text-2xl font-semibold mb-2">Mouthwatering Tiramisu</h2>
+              <p class="text-lg">Indulge in the classic Italian dessert - Tiramisu.</p>
+              <p class="text-lg">Ingredients: Ladyfingers, Coffee, Mascarpone, Cocoa</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more featured recipe cards as needed -->
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Testimonials Section -->
+<div class="container-wrapper">
+  <section class="py-16" data-aos="fade-up" data-aos-duration="1000">
+    <div class="container mx-auto text-center hover-container">
+      <h2 class="text-4xl font-semibold mb-4 hover-line">What Our Users Say</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial Card 1 -->
+        <div class="p-6 bg-white rounded-md shadow-md">
+          <p class="text-lg mb-4">"Resep Nenek has made cooking a joy for me. The variety of recipes is incredible, and the results are always delicious!"</p>
+          <p class="text-sm font-semibold">- Jordy Ahmad</p>
+        </div>
+
+        <!-- Testimonial Card 2 -->
+        <div class="p-6 bg-white rounded-md shadow-md">
+          <p class="text-lg mb-4">"The cooking tips and tricks on Resep Nenek have taken my culinary skills to a new level. Every dish is a masterpiece!"</p>
+          <p class="text-sm font-semibold">- Icikiwir </p>
+        </div>
+        
+        <!-- Testimonial Card 2 -->
+        <div class="p-6 bg-white rounded-md shadow-md">
+          <p class="text-lg mb-4">"Because of the Resep Nenek recipe i can cook for my homies and my dawg"</p>
+          <p class="text-sm font-semibold">- Supardi </p>
+        </div>
+        <!-- Add more testimonial cards as needed -->
+
+      </div>
+    </div>
+  </section>
+</div>
+
+
+    <!-- Newsletter Subscription Section -->
   <section class="py-8">
     <div class="container mx-auto text-center">
       <h2 class="text-2xl font-semibold mb-4">Subscribe to Our Newsletter</h2>
@@ -235,6 +325,12 @@ export default {
 <style scoped>
 body {
   font-family: 'Poppins', sans-serif;
+  color: #eeeeee; /* Updated font color */
+}
+
+body h2 {
+  font-family: 'Playfair Display', serif;
+
 }
 
 /* Your existing styles */
@@ -253,6 +349,7 @@ header h1 {
 header p.text-xl {
   max-width: 800px;
   margin: 0 auto;
+  color: #efdada; /* Updated font color */
 }
 
 .group {
@@ -379,4 +476,35 @@ header p.text-xl {
 .newsletter-section button:hover {
   background-color: #0056b3;
 }
+
+/* Featured Recipes Section Styles */
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Testimonials Section Styles */
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 </style>

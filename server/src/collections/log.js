@@ -1,4 +1,5 @@
 /** @type {import('payload/types').CollectionConfig} */
+// collection log.js
 const log = {
     slug: "log",
     access: {

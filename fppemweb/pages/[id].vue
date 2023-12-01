@@ -1,13 +1,15 @@
 <template>
-  <div class="single-blog container mx-auto p-4">
+  <div class="single-blog container mx-auto p-4 mt-8">
     <nuxt-link
-      class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-8"
+      class="button bg-gray-800 hover:bg-gray-300 text-white font-bold py-2 px-4 rounded mb-8 transition-all duration-300"
       to="/blog"
     >
       Back
     </nuxt-link>
+    <br>
+    <br>
 
-    <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8 mt-8">
+    <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8">
       <div class="blog-img w-full lg:w-1/2">
         <img
           :src="blogDetails.image"
@@ -36,7 +38,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -76,23 +77,21 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 body {
   font-family: 'Poppins', sans-serif;
 }
 
 .button {
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .button:hover {
   background-color: #4a90e2; /* Adjust color as needed */
+  transform: scale(1.05); /* Add a slight scale effect on hover */
 }
 
 .blog-info {
-  border: 1px solid #e2e8f0; /* Border color for the whole section */
-  border-radius: 8px;
   overflow: hidden;
 }
 
