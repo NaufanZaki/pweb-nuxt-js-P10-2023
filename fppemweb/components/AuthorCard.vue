@@ -27,6 +27,13 @@
   body {
   font-family: 'Poppins', sans-serif;
 }
+.dark body {
+  color:#e2e2e2
+}
+.dark .author-card {
+  background: #494848;
+  color: #b3b1b1; /* Change button text color to dark */
+}
   .author-card {
     transition: transform 0.3s ease-in-out;
     display: flex;

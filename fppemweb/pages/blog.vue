@@ -117,7 +117,7 @@ body {
 .dark header input,
 .dark header button {
   border-color: #ffffff;
-  color: #333333; /* Change button text color to dark */
+  color: #b3b1b1; /* Change button text color to dark */
 }
 
 .dark header input::placeholder {
@@ -130,24 +130,18 @@ body {
   color: #ffffff; /* Change button text color on hover/focus to white */
 }
 
-/* Header Styles */
-header {
-  position: relative;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  background-size: cover;
-  background-position: center;
+/* Dark Mode Styles for the Body */
+.dark body {
+  background-color: #121212; /* Change body background color */
+  color: #888888; /* Change body text color to white */
 }
 
-header h1 {
-  margin-bottom: 0.5rem;
+.dark a {
+  color: #64b5f6; /* Change link color in dark mode */
 }
 
-header p {
-  margin-bottom: 0;
-}
-
-header input {
-  padding: 0.5rem;
+.dark a:hover {
+  color: #bbdefb; /* Change link color on hover in dark mode */
 }
 
 /* Additional Styles for the Card */
@@ -173,11 +167,16 @@ header input {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.card-content h2 {
+  color: #333333; /* Set the title color to dark grey */
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
+
 
 </style>

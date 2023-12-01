@@ -5,7 +5,7 @@
 
 
     <!-- Navbar: A responsive navigation bar with dark mode functionality -->
-    <nav :class="{ 'dark': darkMode }" class="bg-white dark:bg-gray-900 border-b border-gray-300 shadow p-4 fixed w-full z-20 opacity-90 hover:opacity-100 transition-opacity rounded-b-lg">
+    <nav :class="{ 'dark': darkMode }" class="bg-white  border-b border-gray-300 shadow p-4 fixed w-full z-20 opacity-90 hover:opacity-100 transition-opacity rounded-b-lg">
           <!-- Navbar container -->
           <div class="container mx-auto flex items-center justify-between">
             <!-- Logo and site name -->
