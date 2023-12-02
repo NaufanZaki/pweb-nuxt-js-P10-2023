@@ -9,14 +9,20 @@
     <br>
     <br>
 
-    <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8">
-      <div class="blog-img w-full lg:w-1/2">
-        <img
-          :src="blogDetails.image"
-          :alt="blogDetails.title"
-          class="max-h-96 w-full object-cover rounded-lg shadow-lg"
-        />
-      </div>
+  <div v-if="blogDetails" class="blog-info flex flex-col lg:flex-row items-center lg:items-start gap-8">
+    <div class="blog-img w-full lg:w-1/2">
+      <img
+        :src="blogDetails.image"
+        :alt="blogDetails.title"
+        class="max-h-96 w-full object-cover rounded-lg shadow-lg"
+      />
+    </div>
+  </div>
+
+  <div v-else class="error-message">
+    An Error seemed to have occured
+  </div>
+</div>
 
       <div class="blog-content w-full lg:w-1/2">
         <h1 class="text-3xl font-semibold mb-4">{{ blogDetails.title }}</h1>
