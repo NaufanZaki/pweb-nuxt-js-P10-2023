@@ -1,11 +1,11 @@
 <template>
-  <div >
+  <div>
     <header class="relative bg-gray-800 text-white py-8" style="background-image: url('https://img.freepik.com/free-photo/healthy-homemade-meal-with-organic-vegetable-variation-garlic-seasoning-generated-by-ai_188544-55802.jpg?t=st=1701189311~exp=1701192911~hmac=af35c7d9cac4bd1dc64cb8dbbef2a1d0fea0ff5be385d30010c04d5a81a9b6e2&w=1800'); background-size: cover; background-position: center;" data-aos="fade-up" data-aos-duration="1000">
       <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay -->
       <div class="container mx-auto flex justify-between items-center relative z-10">
         <div>
           <h1 class="text-5xl font-bold" data-aos="fade-up" data-aos-duration="1000">Resep Nenek</h1>
-          <p class="text-lg" data-aos="fade-up" data-aos-duration="1000">Find and try our delicacy desire food recipes made by the experts at Resep Nenek.</p>
+          <p class="text-lg" data-aos="fade-up" data-aos-duration="1000">Find and try our delicacy desire food recipes made by the experts at Resep Nenek. (this page implement csr)</p>
         </div>
         <div class="flex items-center" data-aos="fade-up" data-aos-duration="1000">
           <input
@@ -26,26 +26,32 @@
       </div>
     </header>
 
+    <!-- Loading indicator -->
+    <div v-if="isLoading" class="text-center mt-4">
+      Fetching data on client...
+    </div>
 
-    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-aos="fade-up" data-aos-duration="1000">
-          <nuxt-link
-            v-for="(post, index) in filteredBlogData"
-            :key="index"
-            :to="{ name: 'id', params: { id: post.id } }"
-            class="card transition-transform duration-300 transform hover:scale-105"
-          >
-            <div class="aspect-w-3 aspect-h-4">
-              <img :src="post.image" :alt="post.title" class="w-full h-full object-cover rounded-t-lg border-b-1 border-gray-300" />
+    <div v-else>
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-aos="fade-up" data-aos-duration="1000">
+        <nuxt-link
+          v-for="(post, index) in filteredBlogData"
+          :key="index"
+          :to="{ name: 'id', params: { id: post.id } }"
+          class="card transition-transform duration-300 transform hover:scale-105"
+        >
+          <div class="aspect-w-3 aspect-h-4">
+            <img :src="post.image" :alt="post.title" class="w-full h-full object-cover rounded-t-lg border-b-1 border-gray-300" />
+          </div>
+          <div class="card-content flex flex-col justify-between p-4 bg-white rounded-b-lg shadow-md h-40"> <!-- Set a fixed height for the card content -->
+            <div>
+              <h2 class="text-xl font-semibold mb-2 overflow-hidden line-clamp-3">{{ post.title }}</h2>
+              <p class="text-gray-600"><strong>Ingredients:</strong> {{ formatIngredients(post.ingredients) }}</p>
             </div>
-            <div class="card-content flex flex-col justify-between p-4 bg-white rounded-b-lg shadow-md h-40"> <!-- Set a fixed height for the card content -->
-              <div>
-                <h2 class="text-xl font-semibold mb-2 overflow-hidden line-clamp-3">{{ post.title }}</h2>
-                <p class="text-gray-600"><strong>Ingredients:</strong> {{ formatIngredients(post.ingredients) }}</p>
-              </div>
-            </div>
-          </nuxt-link>
-        </div>
+          </div>
+        </nuxt-link>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -59,6 +65,7 @@ export default {
       blogData: [],
       searchQuery: "",
       originalData: [],
+      isLoading: false, // Add loading indicator state
     };
   },
   computed: {
@@ -70,15 +77,14 @@ export default {
     },
   },
   mounted() {
-    this.fetchBlogData();
     AOS.init();
-    this.fetchBlogData();
-  
+    this.fetchBlogDataClientSide(); // Fetch data on the client side
   },
   methods: {
-    fetchBlogData() {
+    fetchBlogDataClientSide() {
+      this.isLoading = true;
       axios
-        .get("http://localhost:6969/api/blog")
+        .get("http://localhost:6969/api/blog") // Assuming API is available at the same URL, adjust as needed
         .then((response) => {
           const fetchedPosts = response.data.docs;
           this.blogData = fetchedPosts.map((blog) => ({
@@ -92,6 +98,9 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching blog data:", error);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     resetSearch() {
@@ -108,6 +117,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>
